@@ -8,6 +8,6 @@ private Util () {
 }
     public static int generateRandomId() {
         Random rand = new Random();
-        return rand.nextInt(1000000000);
+        return rand.nextInt(99999);
     }
 }

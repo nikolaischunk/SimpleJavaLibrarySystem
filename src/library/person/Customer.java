@@ -12,7 +12,7 @@ public class Customer extends Person {
         super(firstName, lastName, emailAddress, age, street, number, city, postalCode);
     }
 
-    public void borrow(Item item) {
+    public void borrowItem(Item item) {
         itemsBorrowed.add(item);
         itemsBorrowedAllTime.add(item);
     }
@@ -21,4 +21,19 @@ public class Customer extends Person {
         itemsBorrowed.remove(item);
     }
 
+    public ArrayList<Item> getItemsBorrowed() {
+        return itemsBorrowed;
+    }
+
+    public void setItemsBorrowed(ArrayList<Item> itemsBorrowed) {
+        this.itemsBorrowed = itemsBorrowed;
+    }
+
+    public ArrayList<Item> getItemsBorrowedAllTime() {
+        return itemsBorrowedAllTime;
+    }
+
+    public void setItemsBorrowedAllTime(ArrayList<Item> itemsBorrowedAllTime) {
+        this.itemsBorrowedAllTime = itemsBorrowedAllTime;
+    }
 }
