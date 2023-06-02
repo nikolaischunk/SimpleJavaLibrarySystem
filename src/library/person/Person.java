@@ -24,4 +24,12 @@ public class Person {
         this.city = city;
         this.postalCode = postalCode;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
 }

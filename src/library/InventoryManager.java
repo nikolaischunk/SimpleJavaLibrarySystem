@@ -32,7 +32,7 @@ public class InventoryManager {
 
     public void addMovie(String title, String IMDb, String director, String genre, int length) {
         int randomId = generateRandomId();
-        Movie movie = new Movie(randomId, title, IMDb, length);
+        Movie movie = new Movie(randomId, title, IMDb, director,  length);
         inventory.add(movie);
     }
 
@@ -45,5 +45,11 @@ public class InventoryManager {
             }
         }
         return filteredItems;
+    }
+
+    public void displayInventory() {
+        for (Item item : inventory) {
+            System.out.println(item.toString());
+        }
     }
 }

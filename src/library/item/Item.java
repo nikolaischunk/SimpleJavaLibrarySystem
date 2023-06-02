@@ -4,6 +4,8 @@ import library.person.Customer;
 
 import java.util.ArrayList;
 
+import static utils.Display.print;
+
 public class Item {
     int itemId;
     String title;
@@ -49,5 +51,18 @@ public class Item {
 
     public void setCurrentBorrower(Customer currentBorrower) {
         this.currentBorrower = currentBorrower;
+    }
+
+    public void displayItem() {
+        print("Item ID: " + itemId);
+        print("Title: " + title);
+        print("Available: " + isAvailable);
+    }
+    public void displayItem(boolean detailed){
+        print("Item ID: " + itemId);
+        print("Title: " + title);
+        print("Available: " + isAvailable);
+        if(detailed) print("Borrow history: " + borrowHistory);
+        if(detailed) print("Current borrower: " + currentBorrower);
     }
 }

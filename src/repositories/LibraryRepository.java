@@ -21,8 +21,8 @@ public class LibraryRepository {
         inventory.add(book1);
         inventory.add(book2);
 
-        Movie movie1 = new Movie(3, "The Lord of the Rings: The Fellowship of the Ring", "tt0167261", 180);
-        Movie movie2 = new Movie(4, "The Lord of the Rings: The Two Towers", "tt0167260", 179);
+        Movie movie1 = new Movie(3, "The Lord of the Rings: The Fellowship of the Ring", "tt0167261", "Peter Jackson", 180);
+        Movie movie2 = new Movie(4, "The Lord of the Rings: The Two Towers", "tt0167260", "Peter Jackson", 179);
 
         inventory.add(movie1);
         inventory.add(movie2);
@@ -32,6 +32,9 @@ public class LibraryRepository {
         return inventory;
     }
 
+    public void addItem(Item item) {
+        inventory.add(item);
+    }
 
     public void removeItem(Item item) {
         inventory.remove(item);

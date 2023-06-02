@@ -1,6 +1,7 @@
 package repositories;
 
 import library.person.Customer;
+import library.person.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,4 +32,14 @@ public class UserRepository {
     public List<Customer> getCustomerList() {
         return customerList;
     }
+
+    public Person getUserById(int id) {
+        for (Person person : customerList) {
+            if (person.getId() == id) {
+                return person;
+            }
+        }
+        return null;
+    }
+
 }
