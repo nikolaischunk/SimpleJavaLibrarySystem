@@ -8,6 +8,8 @@ import repositories.LibraryRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.Util.generateRandomId;
+
 public class InventoryManager {
 
     LibraryRepository libraryRepository = new LibraryRepository();
@@ -23,12 +25,14 @@ public class InventoryManager {
     }
 
     public void addBook(String title, String ISBN, String author) {
-        Book book = new Book(title, ISBN, author);
+        int randomId = generateRandomId();
+        Book book = new Book(randomId, title, ISBN, author);
         inventory.add(book);
     }
 
     public void addMovie(String title, String IMDb, String director, String genre, int length) {
-        Movie movie = new Movie(title, IMDb, length);
+        int randomId = generateRandomId();
+        Movie movie = new Movie(randomId, title, IMDb, length);
         inventory.add(movie);
     }
 

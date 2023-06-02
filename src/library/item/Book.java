@@ -5,8 +5,8 @@ public class Book extends Item {
     String ISBN;
     String author;
 
-    public Book(String title, String ISBN, String author) {
-        super(title);
+    public Book(int id, String title, String ISBN, String author) {
+        super(id, title);
         this.ISBN = ISBN;
         this.author = author;
     }

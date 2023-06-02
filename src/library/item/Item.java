@@ -4,8 +4,6 @@ import library.person.Customer;
 
 import java.util.ArrayList;
 
-import static utils.Util.generateRandomId;
-
 public class Item {
     int itemId;
     String title;
@@ -16,8 +14,8 @@ public class Item {
     public Item() {
     }
 
-    public Item(String title) {
-        this.itemId = generateRandomId();
+    public Item(int id, String title) {
+        this.itemId = id;
         this.title = title;
     }
 

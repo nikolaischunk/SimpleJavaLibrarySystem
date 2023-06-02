@@ -10,4 +10,9 @@ private Util () {
         Random rand = new Random();
         return rand.nextInt(99999);
     }
+
+    public static int generateRandomAge() {
+        Random rand = new Random();
+        return rand.nextInt(60);
+    }
 }

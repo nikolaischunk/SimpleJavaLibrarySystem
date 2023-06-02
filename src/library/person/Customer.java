@@ -8,8 +8,8 @@ public class Customer extends Person {
     ArrayList<Item> itemsBorrowed = new ArrayList<Item>();
     ArrayList<Item> itemsBorrowedAllTime = new ArrayList<Item>();
 
-    public Customer(String firstName, String lastName, String emailAddress, int age, String street, int number, String city, String postalCode) {
-        super(firstName, lastName, emailAddress, age, street, number, city, postalCode);
+    public Customer(int id, String firstName, String lastName, String emailAddress, int age, String street, int number, String city, String postalCode) {
+        super(id, firstName, lastName, emailAddress, age, street, number, city, postalCode);
     }
 
     public void borrowItem(Item item) {
