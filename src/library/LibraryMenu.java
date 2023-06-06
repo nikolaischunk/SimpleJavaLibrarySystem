@@ -3,7 +3,10 @@ package library;
 import library.item.Item;
 import library.person.Customer;
 
+import java.util.List;
+
 import static utils.Display.print;
+import static utils.Display.spacer;
 
 public class LibraryMenu {
 
@@ -19,18 +22,19 @@ public class LibraryMenu {
     }
 
     public static void displayCustomerMenu() {
-        print("Display Customer Menu");
+        spacer(true);
         print("==== Customer Terminal Menu ====");
+        spacer("Customer Terminal Menu");
         print("1. Display Inventory");
-        print("2. Borrow Item");
-        print("3. Return Item");
+        print("2. Display Item Details");
+        print("3. Borrow Item");
+        print("4. Return Item");
         print("0. Exit");
-        print("================================");
+        spacer(false);
         print("Enter your choice: ");
     }
 
     public static void displayEmployeeMenu() {
-        print("Display Employee Menu");
         print("==== Employee Menu ====");
         print("1. Display All Customers");
         print("2. Display Inventory");
@@ -41,7 +45,8 @@ public class LibraryMenu {
         print("7. Add Customer");
         print("8. Remove Customer");
         print("0. Exit");
-        print("=======================");
+        spacer();
+        spacer();
         print("Enter your choice: ");
     }
 
@@ -53,8 +58,9 @@ public class LibraryMenu {
         print("Display Customer");
     }
 
-    public static void displayItem() {
+    public static void displayItem(Item item) {
         print("Display Item");
+        item.displayItem(true);
     }
 
     public static void displayBorrowHistory(Customer customer) {
@@ -64,4 +70,14 @@ public class LibraryMenu {
     public static void displayItemBorrowHistory(Item item) {
         print("Display Item Borrow History");
     }
+
+    public static void displayInventory(List<Item> inventory) {
+        spacer(true);
+        for (Item item : inventory) {
+            System.out.println(item.getItemId() + ") " + item.toString());
+        }
+        spacer(false);
+    }
+
+
 }

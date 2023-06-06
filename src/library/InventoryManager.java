@@ -32,7 +32,7 @@ public class InventoryManager {
 
     public void addMovie(String title, String IMDb, String director, String genre, int length) {
         int randomId = generateRandomId();
-        Movie movie = new Movie(randomId, title, IMDb, director,  length);
+        Movie movie = new Movie(randomId, title, IMDb, director, length);
         inventory.add(movie);
     }
 
@@ -47,9 +47,13 @@ public class InventoryManager {
         return filteredItems;
     }
 
-    public void displayInventory() {
+    // Todo: Improve this method
+    public Item getItemById(int id) {
         for (Item item : inventory) {
-            System.out.println(item.toString());
+            if (item.getItemId() == id) {
+                return item;
+            }
         }
+        return null;
     }
 }

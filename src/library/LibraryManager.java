@@ -1,10 +1,12 @@
 package library;
 
+import library.item.Item;
 import library.person.Customer;
 import library.person.Employee;
 import library.person.Person;
 import repositories.UserRepository;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static library.LibraryMenu.*;
@@ -16,6 +18,7 @@ public class LibraryManager {
     private final Scanner scanner;
     UserRepository userRepository = new UserRepository();
     InventoryManager inventoryManager = new InventoryManager();
+    List<Item> inventory = inventoryManager.getInventory();
 
     private LibraryManager() {
         scanner = new Scanner(System.in);
@@ -58,24 +61,25 @@ public class LibraryManager {
 
     private void customerFlow(Customer customer) {
         boolean exitMenu = false;
+        //enhanced switch menu
         while (!exitMenu) {
             displayCustomerMenu();
             int choice = Integer.parseInt(getInput());
             switch (choice) {
-                case 1:
-                    inventoryManager.displayInventory();
-                    break;
-                case 2:
-                    borrowItem();
-                    break;
-                case 3:
-                    returnItem();
-                    break;
-                case 0:
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+                case 1 -> displayInventory(inventory);
+                case 2 -> {
+                    print("Enter item id: ");
+                    int itemId = Integer.parseInt(getInput());
+                    Item item = inventoryManager.getItemById(itemId);
+                    displayItem(item);
+                }
+                case 3 -> borrowItem();
+                case 4 -> returnItem();
+                case 0 -> {
+                    print("Exiting...");
+                    exitMenu = true;
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
