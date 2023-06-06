@@ -18,6 +18,7 @@ public class LibraryManager {
     private final Scanner scanner;
     UserRepository userRepository = new UserRepository();
     InventoryManager inventoryManager = new InventoryManager();
+    CustomerManager customerManager = new CustomerManager();
     List<Item> inventory = inventoryManager.getInventory();
 
     private LibraryManager() {
@@ -81,12 +82,45 @@ public class LibraryManager {
                 }
                 default -> System.out.println("Invalid choice. Please try again.");
             }
+            getInput();
         }
     }
 
     private void employeeFlow(Employee employee) {
         // display employee menu
-        //
+        boolean exitMenu = false;
+        while (!exitMenu) {
+            displayEmployeeMenu();
+            int choice = Integer.parseInt(getInput());
+            switch (choice) {
+                case 1 -> {
+                    displayCustomerList(userRepository.getCustomerList());
+                }
+                case 2 -> displayInventory(inventory);
+                case 3 -> {
+                    print("Enter item id: ");
+                    int itemId = Integer.parseInt(getInput());
+                    Item item = inventoryManager.getItemById(itemId);
+                    displayItem(item);
+                }
+                case 4 -> {
+                    print("Enter customer id: ");
+                    int customerId = Integer.parseInt(getInput());
+                    Customer customer = customerManager.getCustomerById(customerId);
+                    displayCustomer(customer);
+                }
+                case 5 -> addItem();
+                case 6 -> removeItem();
+                case 7 -> addCustomer();
+                case 8 -> removeCustomer();
+                case 0 -> {
+                    print("Exiting...");
+                    exitMenu = true;
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+            getInput();
+        }
     }
 
     public void borrowItem() {

@@ -10,36 +10,36 @@ public class Display {
         System.out.println(message + (newLine ? "\n" : ""));
     }
 
-    public static void spacer(){
-        print("═══════════════════════════");
+    public static void spacer() {
+        print(generateLine(30));
     }
-    public static void spacer(String message) {
-        //print a string that is always 27 characters long and wraps ═ around the message to add up to 27 characters
-        //add a space before and after the message
-        message = " " + message + " ";
+
+    //print a string that is always 30 characters long and wraps ═ around the message to add up to 30 characters
+    public static void topSpacer(String message) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int maxLength = 26; // 30 - 2 (" " * 2) * 2 (2 for the ╔ and ╗)
         int messageLength = message.length();
-        //TODO: Adjust to 30 not 27 length
-        int totalLength = 30;
+        int paddingLength = Math.max(0, (maxLength - messageLength) / 2);
 
-        // Calculate the number of "=" characters needed on each side
-        int equalLength = (totalLength - messageLength) / 2;
+        stringBuilder.append("╔");
+        stringBuilder.append("═".repeat(paddingLength));
+        stringBuilder.append(" " + message + " ");
+        stringBuilder.append("═".repeat(maxLength - paddingLength - messageLength));
+        stringBuilder.append("╗");
 
-        // Print the left padding
-        for (int i = 0; i < equalLength; i++) {
-            System.out.print("═");
-        }
-
-        // Print the message
-        System.out.print(message);
-
-        // Print the right padding
-        for (int i = 0; i < equalLength; i++) {
-            System.out.print("═");
-        }
-        System.out.println();
+        print(stringBuilder.toString());
     }
+
+    public static void bottomSpacer() {
+        print("╚" + generateLine(28) + "╝");
+    }
+
     public static void spacer(boolean isTop) {
-        print(isTop ? "╔═════════════════════════╗" : "╚═════════════════════════╝", true);
+        print(isTop ? "╔" + generateLine(28) + "╗" : "╚" + generateLine(28) + "╝");
     }
 
+    private static String generateLine(int count) {
+        //String builder to easier add characters to a string
+        return "═".repeat(Math.max(0, count));
+    }
 }

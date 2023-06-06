@@ -41,8 +41,8 @@ public class Item {
         return borrowHistory;
     }
 
-    public void setBorrowHistory(ArrayList<Customer> borrowHistory) {
-        this.borrowHistory = borrowHistory;
+    public void addToBorrowHistory(Customer customer) {
+        borrowHistory.add(customer);
     }
 
     public Customer getCurrentBorrower() {
@@ -58,11 +58,12 @@ public class Item {
         print("Title: " + title);
         print("Available: " + isAvailable);
     }
-    public void displayItem(boolean detailed){
+
+    public void displayItem(boolean detailed) {
         print("Item ID: " + itemId);
         print("Title: " + title);
         print("Available: " + isAvailable);
-        if(detailed) print("Borrow history: " + borrowHistory);
-        if(detailed) print("Current borrower: " + currentBorrower);
+        if (detailed) print("Borrow history: " + borrowHistory);
+        if (detailed) print("Current borrower: " + currentBorrower);
     }
 }

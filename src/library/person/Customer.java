@@ -15,10 +15,15 @@ public class Customer extends Person {
     public void borrowItem(Item item) {
         itemsBorrowed.add(item);
         itemsBorrowedAllTime.add(item);
+        item.setAvailable(false);
+        item.addToBorrowHistory(this);
+        item.setCurrentBorrower(this);
     }
 
     public void returnItem(Item item) {
         itemsBorrowed.remove(item);
+        item.setAvailable(true);
+        item.setCurrentBorrower(null);
     }
 
     public ArrayList<Item> getItemsBorrowed() {

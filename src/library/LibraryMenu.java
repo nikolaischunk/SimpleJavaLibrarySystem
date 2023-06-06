@@ -5,8 +5,7 @@ import library.person.Customer;
 
 import java.util.List;
 
-import static utils.Display.print;
-import static utils.Display.spacer;
+import static utils.Display.*;
 
 public class LibraryMenu {
 
@@ -22,20 +21,18 @@ public class LibraryMenu {
     }
 
     public static void displayCustomerMenu() {
-        spacer(true);
-        print("==== Customer Terminal Menu ====");
-        spacer("Customer Terminal Menu");
+        topSpacer("Customer Terminal Menu");
         print("1. Display Inventory");
         print("2. Display Item Details");
         print("3. Borrow Item");
         print("4. Return Item");
         print("0. Exit");
-        spacer(false);
+        bottomSpacer();
         print("Enter your choice: ");
     }
 
     public static void displayEmployeeMenu() {
-        print("==== Employee Menu ====");
+        topSpacer("Employee Menu");
         print("1. Display All Customers");
         print("2. Display Inventory");
         print("3. Display Item Details");
@@ -45,8 +42,7 @@ public class LibraryMenu {
         print("7. Add Customer");
         print("8. Remove Customer");
         print("0. Exit");
-        spacer();
-        spacer();
+        bottomSpacer();
         print("Enter your choice: ");
     }
 
@@ -59,8 +55,10 @@ public class LibraryMenu {
     }
 
     public static void displayItem(Item item) {
-        print("Display Item");
+
+        topSpacer("Display Item");
         item.displayItem(true);
+        bottomSpacer();
     }
 
     public static void displayBorrowHistory(Customer customer) {
@@ -72,11 +70,19 @@ public class LibraryMenu {
     }
 
     public static void displayInventory(List<Item> inventory) {
-        spacer(true);
+        topSpacer("Inventory");
         for (Item item : inventory) {
-            System.out.println(item.getItemId() + ") " + item.toString());
+            print(item.getItemId() + ") " + item + " - " + (item.isAvailable() ? "Available" : "Not Available"));
         }
-        spacer(false);
+        bottomSpacer();
+    }
+
+    public static void displayCustomerList(List<Customer> customers) {
+        topSpacer("Customer List");
+        for (Customer customer : customers) {
+            print(customer.getId() + ") " + customer);
+        }
+        bottomSpacer();
     }
 
 

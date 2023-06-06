@@ -3,6 +3,7 @@ package library;
 import library.item.Book;
 import library.item.Item;
 import library.item.Movie;
+import library.person.Customer;
 import repositories.LibraryRepository;
 
 import java.util.ArrayList;
@@ -55,5 +56,13 @@ public class InventoryManager {
             }
         }
         return null;
+    }
+
+    public void borrowItem(Item item, Customer customer) {
+        customer.borrowItem(item);
+    }
+
+    public void returnItem(Item item, Customer customer) {
+        customer.returnItem(item);
     }
 }
