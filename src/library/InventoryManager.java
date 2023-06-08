@@ -7,6 +7,7 @@ import library.person.Customer;
 import repositories.LibraryRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static utils.Util.generateRandomId;
@@ -15,13 +16,13 @@ public class InventoryManager {
 
     LibraryRepository libraryRepository = new LibraryRepository();
 
-    List<Item> inventory = libraryRepository.getInventory();
+    HashSet<Item> inventory = libraryRepository.getInventory();
 
     public InventoryManager() {
     }
 
 
-    public List<Item> getInventory() {
+    public HashSet<Item> getInventory() {
         return inventory;
     }
 
@@ -60,9 +61,11 @@ public class InventoryManager {
 
     public void borrowItem(Item item, Customer customer) {
         customer.borrowItem(item);
+        item.borrow(customer);
     }
 
     public void returnItem(Item item, Customer customer) {
         customer.returnItem(item);
+        item.bringBack();
     }
 }

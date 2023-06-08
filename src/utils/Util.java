@@ -3,7 +3,7 @@ package utils;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Util {
+public abstract class Util {
     private Util() {
 
     }

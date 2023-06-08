@@ -6,8 +6,8 @@ import library.person.Employee;
 import library.person.Person;
 import repositories.UserRepository;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Objects;
 
 import static library.LibraryMenu.*;
 import static utils.Display.print;
@@ -15,14 +15,13 @@ import static utils.Util.getInput;
 
 public class LibraryManager {
     private static LibraryManager instance;
-    private final Scanner scanner;
+    Person user;
     UserRepository userRepository = new UserRepository();
     InventoryManager inventoryManager = new InventoryManager();
     CustomerManager customerManager = new CustomerManager();
-    List<Item> inventory = inventoryManager.getInventory();
+    HashSet<Item> inventory = inventoryManager.getInventory();
 
     private LibraryManager() {
-        scanner = new Scanner(System.in);
     }
 
     // @ singleton
@@ -41,20 +40,25 @@ public class LibraryManager {
 
     public void displayMenu() {
         boolean exitMenu = false;
-        boolean isLoggedIn = false;
-        Person user = null;
+
         while (!exitMenu) {
             // login display
             displayLoginMenu();
-            int userId = Integer.parseInt(getInput());
-            user = userRepository.getUserById(userId);
-            if (user == null) {
+            String input = getInput();
+            if (Objects.equals(input, "exit")) {
+                exitMenu = true;
+                continue;
+            }
+            int userId = Integer.parseInt(input);
+            this.user = userRepository.getUserById(userId);
+            if (this.user == null) {
                 print("User not found, please try again");
                 continue;
             }
-            if (user instanceof Customer) {
+            print("Welcome back " + user.getFirstName());
+            if (this.user instanceof Customer) {
                 customerFlow((Customer) user);
-            } else if (user instanceof Employee) {
+            } else if (this.user instanceof Employee) {
                 employeeFlow((Employee) user);
             }
         }
@@ -65,7 +69,12 @@ public class LibraryManager {
         //enhanced switch menu
         while (!exitMenu) {
             displayCustomerMenu();
-            int choice = Integer.parseInt(getInput());
+            int choice;
+            try {
+                choice = Integer.parseInt(getInput());
+            } catch (NumberFormatException e) {
+                choice = -1;
+            }
             switch (choice) {
                 case 1 -> displayInventory(inventory);
                 case 2 -> {
@@ -74,13 +83,14 @@ public class LibraryManager {
                     Item item = inventoryManager.getItemById(itemId);
                     displayItem(item);
                 }
-                case 3 -> borrowItem();
-                case 4 -> returnItem();
+                case 3 -> borrowItem(customer);
+                case 4 -> returnItem(customer);
+                case 9 -> displayCustomer(customer);
                 case 0 -> {
                     print("Exiting...");
                     exitMenu = true;
                 }
-                default -> System.out.println("Invalid choice. Please try again.");
+                default -> print("Invalid choice. Please try again.");
             }
             getInput();
         }
@@ -123,12 +133,34 @@ public class LibraryManager {
         }
     }
 
-    public void borrowItem() {
+    public void borrowItem(Customer customer) {
         print("Borrow Item");
+        print("Enter item id: ");
+        int itemId = Integer.parseInt(getInput());
+        Item item = inventoryManager.getItemById(itemId);
+        if (item == null) {
+            print("Please enter a valid ItemId.");
+        } else if (!item.isAvailable()) {
+            print("This item is already borrowed.");
+        } else {
+            inventoryManager.borrowItem(item, customer);
+            print("You borrowed the " + item.getItemType() + " " + item.getTitle());
+        }
     }
 
-    public void returnItem() {
+    public void returnItem(Customer customer) {
         print("Return Item");
+        print("Enter item id: ");
+        int itemId = Integer.parseInt(getInput());
+        Item item = inventoryManager.getItemById(itemId);
+        if (item == null) {
+            print("Please enter a valid ItemId.");
+        } else if (item.isAvailable() || item.getCurrentBorrower() != customer) {
+            print("You did not borrow this " + item.getItemType());
+        } else {
+            inventoryManager.returnItem(item, customer);
+            print("You returned the " + item.getItemType() + " " + item.getTitle());
+        }
     }
 
     public void addItem() {
@@ -146,9 +178,6 @@ public class LibraryManager {
     public void removeCustomer() {
         print("Remove Customer");
     }
-
-
-
 
     /*
         public void borrowItem(Customer customer) {

@@ -4,11 +4,10 @@ import library.item.Book;
 import library.item.Item;
 import library.item.Movie;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class LibraryRepository {
-    List<Item> inventory = new ArrayList<>();
+    HashSet<Item> inventory = new HashSet<>();
 
     public LibraryRepository() {
         initializeLibrary();
@@ -28,7 +27,7 @@ public class LibraryRepository {
         inventory.add(movie2);
     }
 
-    public List<Item> getInventory() {
+    public HashSet<Item> getInventory() {
         return inventory;
     }
 

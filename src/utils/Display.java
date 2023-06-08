@@ -1,6 +1,6 @@
 package utils;
 
-public class Display {
+public abstract class Display {
 
     public static void print(String message) {
         System.out.println(message);
@@ -23,7 +23,7 @@ public class Display {
 
         stringBuilder.append("╔");
         stringBuilder.append("═".repeat(paddingLength));
-        stringBuilder.append(" " + message + " ");
+        stringBuilder.append(" ").append(message).append(" ");
         stringBuilder.append("═".repeat(maxLength - paddingLength - messageLength));
         stringBuilder.append("╗");
 
@@ -32,6 +32,21 @@ public class Display {
 
     public static void bottomSpacer() {
         print("╚" + generateLine(28) + "╝");
+    }
+
+    public static void spacer(String message){
+        StringBuilder stringBuilder = new StringBuilder();
+        int maxLength = 26; // 30 - 2 (" " * 2) * 2 (2 for the ╔ and ╗)
+        int messageLength = message.length();
+        int paddingLength = Math.max(0, (maxLength - messageLength) / 2);
+
+
+        stringBuilder.append("╠");
+        stringBuilder.append("═".repeat(paddingLength));
+        stringBuilder.append(" ").append(message).append(" ");
+        stringBuilder.append("═".repeat(maxLength - paddingLength - messageLength));
+        stringBuilder.append("╣");
+        print(stringBuilder.toString());
     }
 
     public static void spacer(boolean isTop) {

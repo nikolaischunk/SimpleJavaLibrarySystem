@@ -3,6 +3,7 @@ package library;
 import library.item.Item;
 import library.person.Customer;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static utils.Display.*;
@@ -26,6 +27,7 @@ public class LibraryMenu {
         print("2. Display Item Details");
         print("3. Borrow Item");
         print("4. Return Item");
+        print("9. Account Overview");
         print("0. Exit");
         bottomSpacer();
         print("Enter your choice: ");
@@ -52,10 +54,10 @@ public class LibraryMenu {
 
     public static void displayCustomer(Customer customer) {
         print("Display Customer");
+        displayAccountDetails(customer);
     }
 
     public static void displayItem(Item item) {
-
         topSpacer("Display Item");
         item.displayItem(true);
         bottomSpacer();
@@ -69,10 +71,14 @@ public class LibraryMenu {
         print("Display Item Borrow History");
     }
 
-    public static void displayInventory(List<Item> inventory) {
+    public static void displayInventory(HashSet<Item> inventory) {
         topSpacer("Inventory");
-        for (Item item : inventory) {
-            print(item.getItemId() + ") " + item + " - " + (item.isAvailable() ? "Available" : "Not Available"));
+        if (!inventory.isEmpty()) {
+            for (Item item : inventory) {
+                print(item.getItemId() + ") " + item + " - " + item.isAvailableString());
+            }
+        } else {
+            print("Empty");
         }
         bottomSpacer();
     }
@@ -85,5 +91,10 @@ public class LibraryMenu {
         bottomSpacer();
     }
 
-
+    public static void displayAccountDetails(Customer customer) {
+        topSpacer("Account");
+        print("Name: " + customer.getFullName());
+        displayInventory(customer.getItemsBorrowed());
+        bottomSpacer();
+    }
 }

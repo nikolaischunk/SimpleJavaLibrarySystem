@@ -7,7 +7,7 @@ public class Movie extends Item {
     String director;
     int length;
 
-    public Movie(int id, String title, String IMDb, String director,  int length) {
+    public Movie(int id, String title, String IMDb, String director, int length) {
         super(id, title);
         this.director = director;
         this.IMDb = IMDb;
@@ -25,6 +25,11 @@ public class Movie extends Item {
 
     public String getDirector() {
         return director;
+    }
+
+    @Override
+    public String getItemType() {
+        return "Movie";
     }
 
     public String toString() {
