@@ -1,6 +1,7 @@
 package library;
 
 import library.item.Item;
+import library.item.ItemFactory;
 import library.person.Customer;
 import library.person.Employee;
 import library.person.Person;
@@ -20,6 +21,7 @@ public class LibraryManager {
     InventoryManager inventoryManager = new InventoryManager();
     CustomerManager customerManager = new CustomerManager();
     HashSet<Item> inventory = inventoryManager.getInventory();
+    ItemFactory itemFactory = new ItemFactory();
 
     private LibraryManager() {
     }
@@ -119,7 +121,19 @@ public class LibraryManager {
                     Customer customer = customerManager.getCustomerById(customerId);
                     displayCustomer(customer);
                 }
-                case 5 -> addItem();
+                case 5 -> {
+                    addItem();
+//                    print("What type of item would you like to add? [movie, book]");
+//                    String itemType = getInput();
+//                    String itemTitle = getInput("Enter item title: ");
+//                    if (itemType == "movie") {
+//                        Item item = itemFactory.createMovie("movie");
+//                    } else if (itemType == "book") {
+//                        addBook();
+//                    } else {
+//                        print("Invalid item type. Please try again.");
+//                    }
+                }
                 case 6 -> removeItem();
                 case 7 -> addCustomer();
                 case 8 -> removeCustomer();
@@ -178,17 +192,4 @@ public class LibraryManager {
     public void removeCustomer() {
         print("Remove Customer");
     }
-
-    /*
-        public void borrowItem(Customer customer) {
-        borrowHistory.add(customer);
-        currentBorrower = customer;
-        isAvailable = false;
-    }
-
-    public void returnItem() {
-        currentBorrower = null;
-        isAvailable = true;
-    }
-    */
 }

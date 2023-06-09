@@ -22,4 +22,10 @@ public abstract class Util {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+
+    public static String getInput(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
 }

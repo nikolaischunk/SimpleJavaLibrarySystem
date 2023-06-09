@@ -11,7 +11,6 @@ public class Movie extends Item {
         super(id, title);
         this.director = director;
         this.IMDb = IMDb;
-
         this.length = length;
     }
 
