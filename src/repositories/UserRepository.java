@@ -1,6 +1,7 @@
 package repositories;
 
 import library.person.Customer;
+import library.person.Employee;
 import library.person.Person;
 
 import java.util.ArrayList;
@@ -10,10 +11,17 @@ import java.util.List;
 public class UserRepository {
 
     private List<Customer> customerList;
+    private List<Employee> employeeList;
+    private HashSet<Person> people = new HashSet<Person>();
 
     public UserRepository() {
         customerList = new ArrayList<>();
+        employeeList = new ArrayList<>();
+
         initializeCustomers();
+        initializeEmployees();
+        people.addAll(customerList);
+        people.addAll(employeeList);
     }
 
     private void initializeCustomers() {
@@ -30,8 +38,17 @@ public class UserRepository {
         customerList.add(customer5);
     }
 
+    private void initializeEmployees() {
+        Employee employee1 = new Employee(10, "Admin", "John", "Doe", "j.d@mail.com", 30, "Main Street", 123, "City", "12345");
+        Employee employee2 = new Employee(11, "Admin", "Jane", "Smith", "j.s@mail.com", 25, "First Avenue", 456, "Town", "67890");
+    }
+
     public List<Customer> getCustomerList() {
         return customerList;
+    }
+
+    public HashSet<Person> getPeople() {
+        return people;
     }
 
     public Person getUserById(int id) {

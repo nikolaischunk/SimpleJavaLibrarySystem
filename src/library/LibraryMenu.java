@@ -28,7 +28,7 @@ public class LibraryMenu {
         print("3. Borrow Item");
         print("4. Return Item");
         print("9. Account Overview");
-        print("0. Exit");
+        print("0. Logout");
         bottomSpacer();
         print("Enter your choice: ");
     }

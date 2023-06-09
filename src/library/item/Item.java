@@ -72,12 +72,6 @@ public abstract class Item {
         spacer();
     }
 
-    public void displayItem() {
-        print("Item ID: " + this.itemId);
-        print("Title: " + this.title);
-        print("Available: " + this.isAvailableString());
-    }
-
     public void displayItem(boolean detailed) {
         print("Item ID: " + this.itemId);
         print("Title: " + this.title);
